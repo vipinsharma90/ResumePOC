@@ -1,0 +1,11 @@
+\documentclass{article}
+
+\title{#Document#}
+\date{#Date#}
+\author{#Author#}
+
+\begin{document}
+  \maketitle
+  \newpage
+  	#Message#
+\end{document}
