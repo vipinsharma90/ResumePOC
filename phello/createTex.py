@@ -4,15 +4,17 @@ import sys
 from commands import *
 
 #print readOptionValue('Date')
-arguments = str(sys.argv)
+arguments = sys.argv
 user = arguments[1]
 resumeType = arguments[2]
 version = arguments[3]
 style = arguments[4]
+templateFile = arguments[5]
+folderName = user+'/'+resumeType+'/'+version+'/'+style
 fileName = user
-fullFileName = user+'/'+resumeType+'/'+version+'/'+style+'/'+fileName
+fullFileName = folderName+'/'+fileName
 
-f = open(fullFileName+'.temp')
+f = open('templates/'+templateFile+'.temp')
 file =  f.read()
 iterations= file.count('#')/2
 i=0
@@ -25,9 +27,9 @@ while i < iterations:
 	i=i+1
 
 f.close()
-os.chdir('poc')
+os.chdir(folderName)
 #print getoutput('ls -l')
-f = open('hello.tex','w')
+f = open(fileName+'.tex','w')
 f.write(file)
 f.close()
-os.system('latexmk -pdf hello.tex') 
+os.system('latexmk -pdf '+ fileName+'.tex') 
