@@ -1,7 +1,7 @@
 import ConfigParser
 Config = ConfigParser.ConfigParser()
-def allsections():
-	Config.read("poc/hello.ini")
+def allsections(fullFileName):
+	Config.read(fullFileName+'.ini')
 	sections = Config.sections()
 	return sections
 
@@ -10,17 +10,17 @@ def options(section):
 	options= Config.options(section)
 	return options
 
-def alloptions():
+def alloptions(fullFileName):
 	dictionary = {}
-	sections = allsections()
+	sections = allsections(fullFileName)
 	for section in sections:
 		opt = options(section)
 		for option in opt:
 			dictionary[(option.upper()[0] + option[1:])] = Config.get(section,option)
 	return dictionary
 
-def readOptionValue(option):
-	dictionary = alloptions()
+def readOptionValue(fullFileName,option):
+	dictionary = alloptions(fullFileName)
 	value = dictionary[option]
 	return value
 
